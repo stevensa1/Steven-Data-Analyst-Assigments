@@ -1,11 +1,13 @@
-#If Else Statement
-na = 70
+# If-Else Statement
+## Pembuktian If-else series
+val = 100
+if val >= 100:
+   print("Nilai lebih besar sama dengan 100") # Output yang tercetak, karena Python berjalan secara series.
+elif val == 100:
+   print("Nilai sama dengan 100")
 
-def check_grade(na):
-    if na >= 80:
-        print("Anda lulus.")
-    else:
-        print("Anda tidak lulus.")
+## Pengecekan nilai alphabet berdasarkan nilai angka
+na = 75
 
 if na >= 90:
    print("Grade A")
@@ -18,7 +20,7 @@ elif na >= 60 and na < 70:
 else:
    print("Grade E")
 
-# Soto
+## Kasus Soto
 uang = 20000
 
 if uang >= 20000:
@@ -32,10 +34,7 @@ elif uang >= 5000 and uang < 10000:
 else:
     print("Tidak makan dan minum")
 
-uang = 20000
-n = 10
-
-# For loop
+# Looping
 for i in range(1, 10, 2):
    print(i)
 
@@ -44,10 +43,6 @@ while i < 10:
    print(i+1)
    i = i + 1
 
-
-drinks = ["Coca Cola", "Fanta", "Sprite", "Teh Botol"]
-drinks[0]
-
 listku = ['apel', 'pisang', 'melon', 'semangka']
 for i in listku:
    if i == 'pisang':
@@ -55,10 +50,15 @@ for i in listku:
    else:
       print("Pisang tidak ada di listku")
 
-def hello(name):
-   print("Hello World,", name)
 
-hello("Steven")
+# Define function
+# Challenge 1
+# Menghitung nilai akhir
+def check_grade(na):
+    if na >= 80:
+        print("Anda lulus.")
+    else:
+        print("Anda tidak lulus.")
 
 # Challenge 2
 # Fungsi menghitung luas lingkaran
