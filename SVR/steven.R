@@ -24,7 +24,7 @@ terasvirta.test(seq(1:50), flood.occurence) # H0 : Model regresi linear memadai 
 
 # Penentuan Lag ####
 win.graph()
-pacf(flood.occurence)
+pacf(flood.occurence, main = "PACF Kejadian Banjir 2019 - 2023", lwd = 10)
 # Lag banjir
 # Lag signifikan ada pada lag 1 dan 5
 
@@ -86,11 +86,11 @@ fit.svm.radial.test <- predict(svm.radial, df.test)
 residual.test.svm.linear <- df.test$yt - fit.svm.linear.test
 residual.test.svm.radial <- df.test$yt - fit.svm.radial.test
 
-rmse.test.svm.linear <- rmse(residual.test.svm.linear)
-rmse.test.svm.radial <- rmse(residual.test.svm.radial)
+(rmse.test.svm.linear <- rmse(residual.test.svm.linear))
+(rmse.test.svm.radial <- rmse(residual.test.svm.radial))
 
-mape.test.svm.linear <- mape(df.test$yt, fit.svm.linear.test)
-mape.test.svm.radial <- mape(df.test$yt, fit.svm.radial.test)
+(mape.test.svm.linear <- mape(df.test$yt, fit.svm.linear.test))
+(mape.test.svm.radial <- mape(df.test$yt, fit.svm.radial.test))
 
 # Plot Prediksi
 win.graph()
@@ -134,6 +134,8 @@ plot(svm.tune.radial.2, main = "Tuning Result SVR Radial 2")
 # Final Model
 svm.linear.tuned <- svm.tune.linear.2$best.model
 svm.radial.tuned <- svm.tune.radial.2$best.model
+summary(svm.linear.tuned)
+summary(svm.radial.tuned)
 
 # Train Data for Tuned SVR
 fit.svm.tuned.linear.train <- predict(svm.linear.tuned, df.train)

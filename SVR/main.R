@@ -12,9 +12,9 @@ colnames(dataawal) = c("X","Y")
 #PLOT DATA
 win.graph()
 ts.plot(data[,2])
-plot(data[,2],main="Temperatur Udara Kota Bandung",ylab="Harga",xlab="Time")
-lines(data[1:100, 2],col="red")
-lines(data[1:79, 2],col="blue")
+plot(data[,2],main="Temperatur Udara Kota Bandung",ylab="Suhu Udara",xlab="Time", lwd = 3)
+lines(data[1:100, 2],col="red", lwd = 3)
+lines(data[1:79, 2],col="blue", lwd = 3)
 legend("bottomright",col=c("blue","red"),lty=1,legend=c("Training","Testing"))
 
 #HETEROSKEDASTISITAS DAN LINEARITAS DATA
@@ -159,3 +159,9 @@ win.graph()
 par(mfrow=c(2,1))
 ts.plot(testing$y)
 ts.plot(tunedModelTest)
+
+# TUNING PARAMETER FINER GRID
+tuneResult2 <- tune(svm, y~.,  data = training,
+                    ranges = list(epsilon = seq(0.5,1,0.1), cost = (2^1:4))
+)
+tuneResult2
