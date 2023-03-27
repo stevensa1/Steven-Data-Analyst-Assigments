@@ -10,15 +10,17 @@ dataawal=cbind(x,y)
 colnames(dataawal) = c("X","Y")
 
 #PLOT DATA
-ts.plot(data)
-plot(data,main="Temperatur Udara Kota Bandung",ylab="Harga",xlab="Time")
-lines(datain,col="blue")
-lines(dataout,col="yellow")
-legend("bottomright",col=c("blue","yellow"),lty=1,legend=c("Training","Testing"))
+win.graph()
+ts.plot(data[,2])
+plot(data[,2],main="Temperatur Udara Kota Bandung",ylab="Harga",xlab="Time")
+lines(data[1:100, 2],col="red")
+lines(data[1:79, 2],col="blue")
+legend("bottomright",col=c("blue","red"),lty=1,legend=c("Training","Testing"))
 
 #HETEROSKEDASTISITAS DAN LINEARITAS DATA
 white.test(dataawal[,2],dataawal[,1]) #uji heteroskedastisitas
 terasvirta.test(dataawal[,2],dataawal[,1]) #uji nonlinearitas
+
 win.graph()
 plot(dataawal, type = "l",col="black")
 plot(dataawal, type = "p",col="black")
@@ -48,6 +50,8 @@ summary(modeltrain)
 
 prediksisvrtraining = predict(modeltrain, training)
 prediksisvrtraining
+View(prediksisvrtraining)
+
 win.graph()
 plot(training$y, type = "l",col="black")
 lines(prediksisvrtraining, col = "red",pch=4)
@@ -69,7 +73,7 @@ cat("\nNilai Mape adalah = ",round(mapetraining,2),"%\n")
 # PLOT FIT VS TRAIN
 win.graph()
 par(mfrow=c(2,1))
-ts.plot(train$y)
+ts.plot(training$y)
 ts.plot(prediksisvrtraining)
 
 # TUNING PARAMETER
@@ -101,7 +105,7 @@ prediksitrainsvr
 
 # GRAFIK TUNING
 win.graph()
-plot(train$y, type = "l",col="black")
+plot(training$y, type = "l",col="black")
 lines(tunedModelTrain, col = "red",pch=4)
 legend("topleft",
        legend = c("Data Training","SVR"),
@@ -109,7 +113,7 @@ legend("topleft",
        lty = c(1,1))
 
 # NILAI RMSE DAN MAPE TUNING
-resTrain<-train$y-tunedModelTrain
+resTrain<-training$y-tunedModelTrain
 RMSEtrain<-rmse(resTrain)
 
 cat("\nNilai RMSE adalah = ",RMSEtrain,"\n")
