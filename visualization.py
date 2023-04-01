@@ -11,15 +11,15 @@ df = pd.read_csv(data)
 
 #Pie Chart
 
-#Count Plot
-sns.countplot(x = 'Brand Name', data = df)
+# Count Plot for top ten sold brand
+counts = df["Brand Name"].value_counts()[:10]
 
-#Histogram Plot (Price DIstribution)
-sns.histplot(x = "Selling Price", data = df, kde = True, shrink = 1000, hue = "Brand Name", multiple = "stack")
-sns.histplot(x = "Original Price", data = df, kde = True, shrink = 1000, hue = "Brand Name", multiple = "stack")
+## Get labels and values
+labels = counts.index.tolist()
+values = counts.tolist()
 
-# Price vs Rating replot
-sns.relplot(x = "Selling Price", y = "Rating (Out of 5)", data = df, hue = "Brand Name")
-sns.relplot(y = "Selling Price", x = "Average Battery Life (in days)", data = df, hue = "Brand Name")
-
-sns.relplot(y = "Selling Price", x = "Average Battery Life (in days)", data = df, col = "Brand Name")
+## Draw bar plot
+fig, ax = plt.subplots()
+ax.barh(labels, values)
+ax.set_title("Brand Counts")
+plt.show()
