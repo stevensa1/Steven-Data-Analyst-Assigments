@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import seaborn as sns
-import matplotlib.pyplot as plt
 
 # Read data
 df = pd.read_csv('WA_Fn-UseC_-Telco-Customer-Churn.csv')
@@ -38,6 +37,7 @@ obj_df.head()
 # 1 > Yes
 
 # Encoding Variable PhoneService dengan Binary Encoding
+# Melihat jumlah data pada tiap kategori
 obj_df["PhoneService"].value_counts()
 obj_df["PhoneService"] = np.where(obj_df["PhoneService"] == "Yes", 1, 0)
 obj_df.head()
@@ -45,6 +45,7 @@ obj_df.head()
 # 1 > Yes
 
 # Encoding Variable MultipleLines dengan Ordinal Encoding
+# Melihat jumlah data pada tiap kategori
 obj_df["MultipleLines"].value_counts()
 multipledict = {
     "MultipleLines" : {
@@ -57,12 +58,14 @@ obj_df = obj_df.replace(multipledict)
 obj_df.head()
 
 # Encoding Variable InternetService dengan One Hot Encoding
+# Melihat jumlah data pada tiap kategori
 obj_df["InternetService"].value_counts()
 obj_df = pd.get_dummies(obj_df, columns = ["InternetService"])
 obj_df.head()
 obj_df.dtypes
 
 # Encoding Variable OnlineSecurity dengan Ordinal Encoding
+# Melihat jumlah data pada tiap kategori
 obj_df["OnlineSecurity"].value_counts()
 online_dict = {
     "OnlineSecurity" : {
@@ -75,6 +78,7 @@ obj_df = obj_df.replace(online_dict)
 obj_df.head()
 
 # Encoding Variable OnlineBackup dengan Ordinal Encoding
+# Melihat jumlah data pada tiap kategori
 obj_df["OnlineBackup"].value_counts()
 backup_dict = {
     "OnlineBackup" : {
@@ -88,6 +92,7 @@ obj_df.head()
 obj_df.dtypes
 
 # Encoding Variable DeviceProtection dengan Ordinal Encoding
+# Melihat jumlah data pada tiap kategori
 obj_df["DeviceProtection"].value_counts()
 device_protection_dict = {
     "DeviceProtection" : {
@@ -100,6 +105,7 @@ obj_df = obj_df.replace(device_protection_dict)
 obj_df.head()
 
 # Encoding Variable TechSupport dengan Ordinal Encoding
+# Melihat jumlah data pada tiap kategori
 obj_df["TechSupport"].value_counts()
 tech_support_dict = {
     "TechSupport" : {
@@ -112,6 +118,7 @@ obj_df = obj_df.replace(tech_support_dict)
 obj_df.head()
 
 # Encoding Variable StreamingTV dengan Ordinal Encoding
+# Melihat jumlah data pada tiap kategori
 obj_df["StreamingTV"].value_counts()
 streaming_tv_dict = {
     "StreamingTV" : {
@@ -125,6 +132,7 @@ obj_df.head()
 obj_df.dtypes
 
 # Encoding Variable StreamingMovies dengan Ordinal Encoding
+# Melihat jumlah data pada tiap kategori
 obj_df["StreamingMovies"].value_counts()
 streaming_movies_dict = {
     "StreamingMovies" : {
@@ -138,24 +146,28 @@ obj_df.head()
 obj_df.dtypes
 
 # Encoding Varibale Contract dengan One Hot Encoding
+# Melihat jumlah data pada tiap kategori
 obj_df["Contract"].value_counts()
 obj_df = pd.get_dummies(obj_df, columns = ["Contract"])
 obj_df.head()
 obj_df.dtypes
 
 # Encoding Variable PaperlessBilling dengan Binary Encoding
+# Melihat jumlah data pada tiap kategori
 obj_df["PaperlessBilling"].value_counts()
 obj_df["PaperlessBilling"] = np.where(obj_df["PaperlessBilling"] == "Yes", 1, 0)
 obj_df.head()
 obj_df.dtypes
 
 # Encoding Variable PaymentMethod dengan One Hot Encoding
+# Melihat jumlah data pada tiap kategori
 obj_df["PaymentMethod"].value_counts()
 obj_df = pd.get_dummies(obj_df, columns = ["PaymentMethod"])
 obj_df.head()
 obj_df.dtypes
 
 # Encoding Variable Churn dengan Binary Encoding
+# Melihat jumlah data pada tiap kategori
 obj_df["Churn"].value_counts()
 obj_df["Churn"] = np.where(obj_df["Churn"] == "Yes", 1, 0)
 obj_df.head()
