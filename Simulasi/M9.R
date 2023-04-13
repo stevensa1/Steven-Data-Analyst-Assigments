@@ -3,6 +3,9 @@
 # NIM: 082011833060
 # Tugas Minggu ke-9
 
+require("pacman")
+pacman::p_load(ggplot2)
+
 gx <- function(x) {
     return(1/((x+5)^2))
 }
@@ -37,12 +40,36 @@ acceptanceMethod <- function(n, lb, ub) {
     plotdata <- data.frame(xr, gx_res)
     plotdata <- plotdata[order(plotdata$xr),]
 
-    win.graph()
-    plot(rej[,1], rej[,2], pch=4, col = "black", main = "Acceptance-Rejection Method\nby Steven Soewignjo (082011833060)", xlab = "x", ylab = "y")
-    lines(plotdata$xr, plotdata$gx_res, col="red", lwd=5)
-    points(acc[,1], acc[,2], col="blue", lwd=1, pch = 16)
-    legend("topright", legend=c("reject","accept" ,"g(x)"), col=c("black", "blue","red"), pch = c(16, 16, 16), cex=0.8,bg="white")
+    color_reject <- "#ff6f69"
+    color_accept <- "#54c1db"
+    color_gx <- "#22223b"
+    shape_reject <- 23
+    shape_accept <- 24
 
+    win.graph()
+    acceptance_plot <- ggplot() +
+    # Add the rejection points
+    geom_point(data = rej, aes(x = xr, y = yr), shape = 4, color = "black") +
+    # Add the accepted points
+    geom_point(data = acc, aes(x = xr, y = yr), shape = 16, color = "blue", size = 2) +
+    # Add the g(x) line
+    geom_line(data = plotdata, aes(x = xr, y = gx_res), color = "red", size = 1.5) +
+    # Add plot labels and title
+    labs(x = "x", y = "y", title = "Acceptance-Rejection Method\nby Steven Soewignjo (082011833060)") +
+    # Customize plot theme and legend
+    theme_classic() +
+    theme(plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
+          axis.title = element_text(size = 14, face = "bold"),
+          legend.position = "top",
+          legend.box.background = element_rect(color = "black", size = 0.5, linetype = "solid", fill = "#FFFFFF"),
+          legend.title = element_text(size = 12, face = "bold"),
+          legend.text = element_text(size = 12),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank()) +
+    scale_color_manual(values = c(color_reject, color_accept, color_gx), name = "",
+                       labels = c("Reject", "Accept", "g(x)")) +
+    guides(color = guide_legend(override.aes = list(size = 4, shape = c(shape_reject, shape_accept, NA))))
+    print(acceptance_plot)
     result <- ((count_in) / n) * (ub-lb) * fmax
     return(result)
 }
