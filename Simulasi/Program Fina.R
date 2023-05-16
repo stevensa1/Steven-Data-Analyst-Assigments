@@ -1,8 +1,13 @@
-simulasi <- function(data) {
+simulasi <- function(data, test) {
     # data = data yang akan dihitung probabilitasnya
     # return = data frame dengan kolom data, freq, prob, dan cum_prob
     mape <- function(act, pred) {
       return(abs((act - pred) / act) * 100)
+    }
+
+    if(length(data) != length(test)) {
+        cat("Data tidak sama panjang!\n")
+        return()
     }
 
     prob <- data / sum(data)
@@ -35,11 +40,11 @@ simulasi <- function(data) {
       }
     }
     cat("Hasil\n")
-    mape <- mape(data, random_result)
+    mape <- mape(random_result, test)
     akurasi <- 100 - mape
 
-    result <- data.frame(data, prob, tag_l, tag_u, random_dat, random_result, mape, akurasi)
-    names(result) <- c("Data Tahun", "Probabilitas", "Batas Bawah", "Batas Atas", "Random", "Hasil Prediksi Tahun Depan", "MAPE", "Akurasi")
+    result <- data.frame(data, prob, tag_l, tag_u, random_dat, random_result, test, mape, akurasi)
+    names(result) <- c("Data Tahun", "Probabilitas", "Batas Bawah", "Batas Atas", "Random", "Hasil Prediksi Tahun Depan", "Data Tahun Depan", "MAPE", "Akurasi")
     
     # print(result)
     View(result)
@@ -55,8 +60,10 @@ simulasi(real_thn)
 
 input_data <- function() {
   cat("Simulasi Monte Carlo\n")
-  cat("Masukkan data tahunan\n")
-  x = scan(what = double(), nmax = 12)
-  simulasi(x)
+  cat(">> Masukkan data tahun ini\n")
+  x <- scan(what = double(), nmax = 12)
+  cat(">> Masukkan data tahun depan\n")
+  y <- scan(what = double(), nmax = length(x))
+  simulasi(x, y)
 }
 input_data()
