@@ -12,7 +12,9 @@ congruential_mixed <- function(z0, a, m, c, n) {
   return(u)
 }
 
-simulasi <- function(data, test, random_method = 1, x0 = 0, a = 0, m = 0, c = 0) {
+congruential_mixed(16, 26, 99, 20, 12)
+
+simulasi <- function(data, test, random_method, x0, a, m, c) {
     # data = data yang akan dihitung probabilitasnya
     # return = data frame dengan kolom data, freq, prob, dan cum_prob
     mape <- function(act, pred) {
@@ -103,17 +105,13 @@ input_data <- function() {
     choice <- readline(prompt = "Pilihan: ")
   }
   if(choice == 1) {
-    simulasi(x, y)
+    simulasi(x, y, choice, 0, 0, 0, 0)
   } else if(choice == 2) {
-    cat(">> Masukkan nilai seed\n")
-    seed <- readline()
-    cat(">> Masukkan nilai a\n")
-    a <- readline()
-    cat(">> Masukkan nilai m\n")
-    m <- readline()
-    cat(">> Masukkan nilai c\n")
-    c <- readline()
-    simulasi(x, y, seed, a, m, c)
+    x0 <- as.integer(readline(">> Masukkan nilai z0: "))
+    a <- as.integer(readline(">> Masukkan nilai a: "))
+    m <- as.integer(readline(">> Masukkan nilai m: "))
+    c <- as.integer(readline(">> Masukkan nilai c: "))
+    simulasi(x, y, choice, x0, a, m, c)
   }
 }
 input_data()
