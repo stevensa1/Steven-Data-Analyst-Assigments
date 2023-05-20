@@ -16,3 +16,4 @@ print(data)
 # Create boxplot
 
 sns.boxplot(data, x = "Components", y = "Result")
+
